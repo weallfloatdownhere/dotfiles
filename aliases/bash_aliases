@@ -1,0 +1,295 @@
+# Unix
+
+alias e="$EDITOR"
+alias v="$VISUAL"
+
+# Ansible
+if command -v ansible &> /dev/null
+then
+    alias ansiblefacts='ansible localhost -m ansible.builtin.setup'
+fi
+
+# ls specifics
+if command -v exa &> /dev/null
+then
+    alias ls='exa -a'
+fi
+
+if command -v argocd-autopilot &> /dev/null
+then
+    alias argoap='argocd-autopilot'
+    alias argoapp='argocd-autopilot project'
+    alias argoapr='argocd-autopilot repo'    
+fi
+
+# shortcuts
+alias cltmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
+alias des='cd ~/Desktop'
+alias ctmp='cd $(mktemp -d)'
+
+# ls commands
+alias ls="ls --color"
+alias ll="ls -l"
+alias ln="ln -v"
+alias l='ls -l'
+alias la='ls'
+alias lla='ls -l'
+alias lt='ls --tree'
+alias ip='ip -c'
+alias rm='rm -i'
+
+# rm commands
+alias ra="rm -rf"
+
+# fonts
+
+# mkdir commands
+alias mkdir="mkdir -p"
+
+# navi
+if command -v navi &> /dev/null
+then
+alias navi="navi --fzf-overrides '--layout=reverse --with-nth 1,2 --border=rounded --margin 5% --padding 3%'"
+alias nav="navi"
+fi
+
+# kitty
+if [ -x "$(command -v kitty)" ]; then alias icat="kitty +kitten icat"; fi
+
+# Dos2unix recursive
+if [ -x "$(command -v dos2unix)" ]; then alias d2u='find . -type f -print0 | xargs -0 dos2unix'; fi
+
+# Ranger
+if [ -x "$(command -v ranger)" ]; then alias r='ranger .'; fi
+
+# Minikube
+if [ -x "$(command -v minikube)" ]; then alias minikuberestart="minikube delete && minikube start"; fi
+
+# Print all hostnames
+alias hostname='hostname -A'
+
+# Grant execution right to all .sh files inside the current directory recursively
+alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
+
+# Open atom in the current directory
+if [ -x "$(command -v atom)" ]; then alias a='atom .'; fi
+
+# History grep text
+alias gh='history|grep'
+
+# peek recorder
+if [ -x "$(command -v peek)" ]; then alias peek='peek --display=$DISPLAY &'; fi
+
+# Python3 shortcut
+alias p3='python3'
+
+# Cat a file and put the content in the clipboard
+alias caty='xclip -sel c <' # copy cotent of the file in clipboard, ex : caty input.txt
+
+# Restart vmtool service
+alias rvm='sudo systemctl restart vmtoolsd.service'
+
+# Mullvad
+if command -v openvpn &> /dev/null
+then
+alias mullvad='sudo openvpn --config'
+alias mulvad='sudo openvpn --config'
+alias mulv='sudo openvpn --config'
+alias muvad='sudo openvpn --config'
+fi
+
+if command -v kb &> /dev/null
+then
+alias kbl="kb list"
+alias kbe="kb edit"
+alias kba="kb add"
+alias kbv="kb view"
+alias kbd="kb delete --id"
+alias kbg="kb grep"
+alias kbt="kb list --tags"
+fi
+
+# Vagrant
+if command -v vagrant &> /dev/null
+then
+alias va='vagrant'
+alias vadf='vagrant destroy -f'
+alias vau='vagrant up'
+alias vaup='vagrant up --provision'
+fi
+
+# Git
+if command -v git &> /dev/null
+then
+alias cg='cd `git rev-parse --show-toplevel`'
+alias gst='git status'
+alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
+fi
+
+# Docker
+if command -v docker &> /dev/null
+then
+alias dr='docker run -it '
+alias dok='docker'
+alias dokb='docker build'
+alias dokr='docker run'
+alias doklia='docker image ls --all'
+alias dormi='docker rmi -f $(docker images -a -q)'
+alias dormc='docker rm -vf $(docker ps -a -q)'
+alias dora='docker system prune -f || true && docker rm -vf $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true &&  docker system prune -f || true'
+fi
+
+if command -v urxvt &> /dev/null
+then
+alias rxvt-unicode='urxvt'
+fi
+
+if command -v tmux &> /dev/null
+then
+alias tm='tmux'
+fi
+
+if command -v flux &> /dev/null
+then
+alias frh='flux reconcile helmrelease'
+alias frs='flux reconcile source'
+alias frk='flux reconcile kustomization'
+alias frall='flux reconcile source git flux-system && flux reconcile kustomization flux-system applications core --with-source'
+alias fgall='flux get all'
+alias flog='flux logs'
+fi
+
+# Kubernetes
+if command -v kubectl &> /dev/null
+then
+alias k='kubectl'
+alias kconf='export KUBECONFIG=$(pwd)/kube_config_cluster.yml'
+alias kgsf='kubectl get -o wide statefulset'
+alias kgsec='kubectl get -o wide secret'
+alias kgseca='kubectl get -o wide secret -A'
+alias kgs='kubectl get -o wide service'
+alias kgsc='kubectl get -o wide storageclass'
+alias kgea='kubectl get -o wide events -A'
+alias kgeall='kubectl get -o wide events -A'
+alias kge='kubectl get -o wide events'
+alias kgpva='kubectl get -o wide pv -A'
+alias kgpvca='kubectl get -o wide pvc -A'
+alias kns='kubens'
+alias kgsca='kubectl get -o wide storageclass -A'
+alias kgss='kubectl get -o wide sealedsecret -A'
+alias kdss='kubectl describe sealedsecret -A'
+alias kggr='kubectl get -o wide gitrepository -A'
+alias kdgr='kubectl describe gitrepository -A'
+alias kghc='kubectl get -o wide helmcharts -A'
+alias kdhc='kubectl describe helmcharts -A'
+alias kghrl='kubectl get -o wide helmrelease -A'
+alias kdhrl='kubectl describe helmrelease -A'
+alias kghr='kubectl get -o wide helmrepository -A'
+alias kdhr='kubectl describe helmrepository -A'
+alias kgir='kubectl get -o wide imagerepository -A'
+alias kdir='kubectl describe imagerepository -A'
+alias kdel='kubectl delete'
+alias kginr='kubectl get -o wide ingressroute -A'
+alias kdinr='kubectl describe ingressroute -A'
+alias kgic='kubectl get -o wide ingressclass -A'
+alias kdic='kubectl describe ingressclass -A'
+alias kdelp='kubectl delete pod'
+alias kdelns='kubectl delete namespace'
+alias kdelsf='kubectl delete statefulset'
+alias kgpa='kubectl get pod -o wide -A'
+alias kgsa='kubectl get -o wide service -A'
+alias kgnsa='kubectl get -o wide ns -A'
+alias kgdep='kubectl get -o wide deploy'
+alias kgda='kubectl get -o wide deploy -A'
+alias kgia='kubectl get -o wide ingress -A'
+alias kgca='kubectl get -o wide cert -A'
+alias kdp='kubectl describe pods'
+alias kdsf='kubectl describe statefulset'
+alias kdd='kubectl describe deploy'
+alias kds='kubectl describe service'
+alias kdsa='kubectl describe service -A'
+alias kdns='kubectl describe namespace'
+alias kdi='kubectl describe ingress'
+alias kx='kubectx'
+alias kkr='kubectl krew'
+alias ksys='kubectl --namespace=kube-system'
+alias kin='kubectl ingress-nginx'
+alias kga='kubectl get -o wide all'
+alias kgall='kubectl get -o wide all -A'
+alias kak='kubectl apply -k'
+alias kps='kubectl patch svc'
+alias kk='kubectl kustomize'
+alias kdeldep='kubectl delete deployment'
+alias kex='kubectl exec -i -t'
+alias kl='kubectl logs'
+alias klop='kubectl logs -f -p'
+alias kp='kubectl proxy'
+alias kpf='kubectl port-forward'
+alias kg='kubectl get -o wide'
+alias kd='kubectl describe'
+alias krm='kubectl delete'
+alias kgpo='kubectl get -o wide pods'
+alias kdpo='kubectl describe pods'
+alias kgno='kubectl get -o wide nodes'
+alias kgna='kubectl get -o wide nodes -A'
+alias kdno='kubectl describe nodes'
+alias kdnoa='kubectl describe nodes -A'
+alias kgns='kubectl get -o wide namespaces'
+alias kdns='kubectl describe namespaces'
+alias kglb='kubectl get -o wide --show-labels'
+alias kwnsa='kubectl get -o wide --all-namespaces --watch'
+alias kexn='kubectl exec -i -t --namespace'
+alias klon='kubectl logs -f --namespace'
+alias kpfn='kubectl port-forward --namespace'
+alias kgn='kubectl get -o wide --namespace'
+alias kdn='kubectl describe --namespace'
+alias kgsecn='kubectl get -o wide secret --namespace'
+alias kdsecn='kubectl describe secret --namespace'
+alias kall='kubectl get -o wide -o=wide -A'
+alias kw='kubectl get -o wide --watch --namespace'
+alias knot='kubectl node top'
+alias kdu='kubectl describe user'
+alias kdua='kubectl describe user -A'
+alias kgu='kubectl get -o wide user'
+alias kdvo='kubectl describe vhost'
+alias kgvo='kubectl get -o wide vhost'
+alias kgvoa='kubectl get -o wide vhost -A'
+alias kgperm='kubectl get -o wide Permission'
+alias kgperma='kubectl get -o wide Permission -A'
+alias kgnp='kubectl get -o wide NetworkPolicy'
+alias kgnpa='kubectl get -o wide NetworkPolicy -A'
+alias kgpol='kubectl get -o wide Policy'
+alias kdpol='kubectl describe Policy'
+alias kdpola='kubectl describe Policy -A'
+alias kgpola='kubectl get -o wide Policy -A'
+alias kdvoa='kubectl describe vhost -A'
+alias kgpv='kubectl get -o wide pv'
+alias kgpva='kubectl get -o wide pv -A'
+alias kgpvc='kubectl get -o wide pvc'
+alias kgpvca='kubectl get -o wide pvc -A'
+alias kdpvc='kubectl describe pvc'
+alias kdpvca='kubectl describe pvc -A'
+alias kgua='kubectl get -o wide user -A'
+alias kgep='kubectl get -o wide endpoints'
+alias kgepa='kubectl get -o wide endpoints -A'
+alias kdep='kubectl describe endpoints'
+alias kdepa='kubectl describe endpoints -A'
+alias kgser='kubectl get -o wide service'
+alias kgsera='kubectl get -o wide service -A'
+alias kdser='kubectl describe service'
+alias kdsera='kubectl describe service -A'
+alias kdc='kubectl describe cert'
+alias kdca='kubectl describe cert -A'
+alias kgcm='kubectl get -o wide configmap'
+alias kgcma='kubectl get -o wide configmap -A'
+alias kdcm='kubectl describe configmap'
+alias kdcma='kubectl describe configmap -A'
+alias kgcia='kubectl get -o wide ClusterIssuer -A'
+alias kgci='kubectl get -o wide ClusterIssuer'
+alias kdcia='kubectl describe ClusterIssuer -A'
+alias kdci='kubectl describe ClusterIssuer'
+alias kgexa='kubectl get -o wide exchange -A'
+alias kgex='kubectl get -o wide exchange'
+alias kdexa='kubectl describe exchange -A'
+alias kdex='kubectl describe exchange'
+fi
