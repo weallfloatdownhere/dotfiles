@@ -294,4 +294,5 @@ alias kgexa='kubectl get -o wide exchange -A'
 alias kgex='kubectl get -o wide exchange'
 alias kdexa='kubectl describe exchange -A'
 alias kdex='kubectl describe exchange'
+alias kgcc='kubectl config current-context'
 fi
