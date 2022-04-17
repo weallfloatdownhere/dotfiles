@@ -26,6 +26,8 @@ fi
 alias cltmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
 alias des='cd ~/Desktop'
 alias ctmp='cd $(mktemp -d)'
+alias cx='chmod +x'
+alias cown='sudo chown -R $USER:USER'
 
 # ls commands
 alias ls="ls --color"
