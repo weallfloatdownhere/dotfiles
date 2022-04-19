@@ -100,6 +100,11 @@ alias mulv='sudo openvpn --config'
 alias muvad='sudo openvpn --config'
 fi
 
+if command -v gp-saml-gui &> /dev/null
+then
+alias gpvpn='gp-saml-gui --clientos Windows --gateway --no-verify'
+fi
+
 if command -v kb &> /dev/null
 then
 alias kbl="kb list"
