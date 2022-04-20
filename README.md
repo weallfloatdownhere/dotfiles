@@ -1,2 +1,2 @@
-# dotfiles-bucket
+# Collection of modular dotfiles templates
 Compilation of random dotfiles
