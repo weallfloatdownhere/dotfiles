@@ -171,6 +171,7 @@ if command -v kubectl &> /dev/null
 then
 alias k='kubectl'
 alias kconf='export KUBECONFIG=$(pwd)/kube_config_cluster.yml'
+alias kconfi='mkdir $HOME/.kube && cp $(pwd)/kube_config_cluster.yml $HOME/.kube/config --backup=t && export KUBECONFIG=$HOME/.kube/config'
 alias kgsf='kubectl get -o wide statefulset'
 alias kgsec='kubectl get -o wide secret'
 alias kgseca='kubectl get -o wide secret -A'
