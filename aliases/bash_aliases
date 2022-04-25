@@ -167,8 +167,8 @@ alias flog='flux logs'
 fi
 
 # Kubernetes
-alias kns-intall='sudo curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kns && chmod +x ~/.local/bin/kns'
-alias kctx-intall='sudo curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kctx && chmod +x ~/.local/bin/kctx'
+alias kns-install='sudo curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kns && chmod +x ~/.local/bin/kns'
+alias kctx-install='sudo curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kctx && chmod +x ~/.local/bin/kctx'
 
 if command -v kubectl &> /dev/null
 then
