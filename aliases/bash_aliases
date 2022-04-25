@@ -167,8 +167,12 @@ alias flog='flux logs'
 fi
 
 # Kubernetes
+alias kns-intall='sudo curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kns && chmod +x ~/.local/bin/kns'
+alias kctx-intall='sudo curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kctx && chmod +x ~/.local/bin/kctx'
+
 if command -v kubectl &> /dev/null
 then
+alias kns='kubens'
 alias k='kubectl'
 alias kconf='export KUBECONFIG=$(pwd)/kube_config_cluster.yml'
 alias kconfi='mkdir $HOME/.kube && cp $(pwd)/kube_config_cluster.yml $HOME/.kube/config --backup=t && export KUBECONFIG=$HOME/.kube/config'
@@ -182,7 +186,6 @@ alias kgeall='kubectl get -o wide events -A'
 alias kge='kubectl get -o wide events'
 alias kgpva='kubectl get -o wide pv -A'
 alias kgpvca='kubectl get -o wide pvc -A'
-alias kns='kubens'
 alias kgsca='kubectl get -o wide storageclass -A'
 alias kgss='kubectl get -o wide sealedsecret -A'
 alias kdss='kubectl describe sealedsecret -A'
