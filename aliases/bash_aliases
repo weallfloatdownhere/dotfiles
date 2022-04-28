@@ -42,6 +42,9 @@ alias lt='ls --tree'
 alias ip='ip -c'
 alias rm='rm -i'
 
+# browsers
+alias bop='python3 -mwebbrowser' # browser open: bop [url]
+
 # rm commands
 alias ra="rm -rf"
 
@@ -77,9 +80,6 @@ alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 
 # Open atom in the current directory
 if [ -x "$(command -v atom)" ]; then alias a='atom .'; fi
-
-# History grep text
-alias gh='history|grep'
 
 # peek recorder
 if [ -x "$(command -v peek)" ]; then alias peek='peek --display=$DISPLAY &'; fi
@@ -251,7 +251,7 @@ alias kl='kubectl logs'
 alias klop='kubectl logs -f -p'
 alias kp='kubectl proxy'
 alias kpf='kubectl port-forward'
-alias kpfargo='kubectl port-forward -n argocd svc/argocd-server 8080:80'
+alias kpfargo='(nohup "$(sleep 3 && python3 -mwebbrowser https://127.0.0.1:8080)" &) && kubectl port-forward -n argocd svc/argocd-server 8080:80'
 alias kg='kubectl get -o wide'
 alias kd='kubectl describe'
 alias krm='kubectl delete'
