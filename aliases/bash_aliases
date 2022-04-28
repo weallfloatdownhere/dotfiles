@@ -186,6 +186,7 @@ alias kgsea='kubectl get serviceaccount -A'
 alias kdseaa='kubectl describe serviceaccount -A'
 alias kdsea='kubectl describe serviceaccount'
 
+alias kdelaps='kubectl delete applicationset'
 alias kdaps='kubectl describe applicationset'
 alias kdapsa='kubectl describe applicationset -A'
 alias kgaps='kubectl get applicationset'
