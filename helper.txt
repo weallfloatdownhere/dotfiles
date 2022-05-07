@@ -1,0 +1,9 @@
+Install / Remove Kubernetes with RKE
+[https://hub.docker.com/repository/docker/silentreatmen7/rgm-rke]
+docker run -it --rm --mount type=bind,source=$(pwd),target=/data silentreatmen7/rgm-rke install
+docker run -it --rm --mount type=bind,source=$(pwd),target=/data silentreatmen7/rgm-rke remove
+
+Install / Remove ArgoCD
+[https://hub.docker.com/repository/docker/silentreatmen7/rgm-argocd]
+docker run -it --rm --mount type=bind,source=$(pwd),target=/data silentreatmen7/rgm-argocd install
+docker run -it --rm --mount type=bind,source=$(pwd),target=/data silentreatmen7/rgm-argocd remove
