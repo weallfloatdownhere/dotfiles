@@ -1,9 +1,12 @@
 # Unix
 
 
-alias refreshaliases='curl -L --silent https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases -o ~/.aliases'
+alias raliases='curl -L --silent https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases -o ~/.aliases'
+alias hlp='curl https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/helper.txt'
 alias e="$EDITOR"
 alias v="$VISUAL"
+
+
 
 # Ansible
 if command -v ansible &> /dev/null
