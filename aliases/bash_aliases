@@ -53,8 +53,8 @@ alias ra="rm -rf"
 # mkdir commands
 alias mkdir="mkdir -p"
 
-if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
-if [ ! -f "$HOME/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/bin/ch" && chmod +x "$HOME/bin/ch"; fi
+if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
+if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch" && chmod +x "$HOME/.local/bin/ch"; fi
 
 # navi
 if command -v navi &> /dev/null
