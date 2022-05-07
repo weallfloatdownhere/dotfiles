@@ -53,6 +53,9 @@ alias ra="rm -rf"
 # mkdir commands
 alias mkdir="mkdir -p"
 
+if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
+if [ ! -f "$HOME/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/bin/ch" && chmod +x "$HOME/bin/ch"; fi
+
 # navi
 if command -v navi &> /dev/null
 then
