@@ -6,8 +6,6 @@ alias hlp='curl https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/ma
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-
-
 # Ansible
 if command -v ansible &> /dev/null
 then
@@ -33,6 +31,8 @@ alias des='cd ~/Desktop'
 alias ctmp='cd $(mktemp -d)'
 alias cx='chmod +x'
 alias cown='sudo chown -R $USER:USER'
+
+alias gi='grep -i'
 
 # ls commands
 alias ls="ls --color"
