@@ -187,9 +187,11 @@ alias kconfall='export KUBECONFIG= && for kubeconfigFile in `find "$(pwd)" -type
 alias kconfi='mkdir $HOME/.kube && cp $(pwd)/kube_config_cluster.yml $HOME/.kube/config --backup=t && export KUBECONFIG=$HOME/.kube/config'
 alias kgsf='kubectl get -o wide statefulset'
 # print kubernetes cluster info
-alias kci='kubectl cluster-info'
+alias kclinfo='kubectl cluster-info'
 # print kubernetes cluster info verbose
-alias kcia='kubectl config view'
+alias kclview='kubectl config view'
+# print the whole cluster log dump
+alias kcldebug='kubectl cluster-info dump'
 
 alias kgseaa='kubectl get serviceaccount -A'
 alias kgsea='kubectl get serviceaccount -A'
