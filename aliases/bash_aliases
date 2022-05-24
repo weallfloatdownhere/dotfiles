@@ -180,7 +180,7 @@ alias kctx-install='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githu
 
 if command -v helm &> /dev/null
 then
-alias helmdry='helm install --dry-run --debug'
+alias helmdry='helm install --generate-name --dry-run --debug'
 fi
 
 if command -v kubectl &> /dev/null
