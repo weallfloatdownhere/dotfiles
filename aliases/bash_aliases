@@ -2,6 +2,7 @@
 
 
 alias raliases='curl -L --silent https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases -o ~/.aliases'
+alias searchalias='cat ~/.aliases | grep -i'
 alias hlp='curl https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/helper.txt'
 alias e="$EDITOR"
 alias v="$VISUAL"
