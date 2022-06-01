@@ -216,6 +216,8 @@ alias kdepa='kubectl describe deploy -A'
 alias kgdepa='kubectl get deploy -A'
 alias kdeldep='kubectl delete deploy'
 
+alias kdry='kubectl --dry-run=client -o yaml apply -f'
+
 alias kgsec='kubectl get -o wide secret'
 alias kgseca='kubectl get -o wide secret -A'
 alias kgs='kubectl get -o wide service'
