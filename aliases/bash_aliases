@@ -184,6 +184,8 @@ then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
 fi
 
+alias argopass="echo $(htpasswd -bnBC 10 \"\" admin | tr -d ':\n')"
+
 if command -v kubectl &> /dev/null
 then
 alias kns='kubens'
