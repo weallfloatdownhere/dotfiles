@@ -184,7 +184,7 @@ then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
 fi
 
-alias argopass="echo $(htpasswd -bnBC 10 \"\" admin | tr -d ':\n')"
+alias argopass="htpasswd -nbBC 10 '' $ARGOPASS | tr -d ':\n' | sed 's/$2y/$2a/'"
 
 if command -v kubectl &> /dev/null
 then
