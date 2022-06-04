@@ -1,7 +1,10 @@
 # Unix
 
+# Aliases shortcuts
+alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
+alias sa='source ~/.aliases'
+alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 
-alias raliases='curl -L --silent $ALIASES_URL -o ~/.aliases'
 alias searchalias='cat ~/.aliases | grep -i'
 alias hlp='curl https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/helper.txt'
 alias e="$EDITOR"
@@ -50,7 +53,7 @@ alias rm='rm -i'
 alias bop='python3 -mwebbrowser' # browser open: bop [url]
 
 # rm commands
-alias ra="rm -rf"
+alias rmm="rm -rf"
 
 # fonts
 
