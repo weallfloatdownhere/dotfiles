@@ -5,9 +5,31 @@ alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
 alias sa='source ~/.aliases'
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
-
 alias e="$EDITOR"
 alias v="$VISUAL"
+# shortcuts
+alias cltmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
+alias des='cd ~/Desktop'
+alias ctmp='cd $(mktemp -d)'
+alias cx='chmod +x'
+alias cown='sudo chown -R $USER:USER'
+alias gi='grep -i'
+# ls commands
+alias ls="ls --color"
+alias ll="ls -l"
+alias ln="ln -v"
+alias l='ls -l'
+alias la='ls'
+alias lla='ls -l'
+alias lt='ls --tree'
+alias ip='ip -c'
+alias rm='rm -i'
+# browsers
+alias bop='python3 -mwebbrowser' # browser open: bop [url]
+# rm commands
+alias rmm="rm -rf"
+# mkdir commands
+alias mkdir="mkdir -p"
 
 # Ansible
 if command -v ansible &> /dev/null
@@ -27,37 +49,6 @@ then
     alias argoapp='argocd-autopilot project'
     alias argoapr='argocd-autopilot repo'    
 fi
-
-# shortcuts
-alias cltmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
-alias des='cd ~/Desktop'
-alias ctmp='cd $(mktemp -d)'
-alias cx='chmod +x'
-alias cown='sudo chown -R $USER:USER'
-
-alias gi='grep -i'
-
-# ls commands
-alias ls="ls --color"
-alias ll="ls -l"
-alias ln="ln -v"
-alias l='ls -l'
-alias la='ls'
-alias lla='ls -l'
-alias lt='ls --tree'
-alias ip='ip -c'
-alias rm='rm -i'
-
-# browsers
-alias bop='python3 -mwebbrowser' # browser open: bop [url]
-
-# rm commands
-alias rmm="rm -rf"
-
-# fonts
-
-# mkdir commands
-alias mkdir="mkdir -p"
 
 if command -v zsh &> /dev/null
 then
@@ -149,6 +140,11 @@ alias gst='git status'
 alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
 fi
 
+if command -v htpasswd &> /dev/null
+then
+alias cryptpass="echo $(htpasswd -bnBC 10 \"\" $CRYPTPASS | tr -d ':\n')"
+fi
+
 # Docker
 if command -v docker &> /dev/null
 then
@@ -191,8 +187,6 @@ then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
 alias helmcompile='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && helm package --dependency-update ." \;'
 fi
-
-alias argopass="echo $(htpasswd -bnBC 10 \"\" admin | tr -d ':\n')"
 
 if command -v kubectl &> /dev/null
 then
