@@ -30,6 +30,11 @@ alias bop='python3 -mwebbrowser' # browser open: bop [url]
 alias rmm="rm -rf"
 # mkdir commands
 alias mkdir="mkdir -p"
+# Print all hostnames
+alias hostname='hostname -A'
+# Grant execution right to all .sh files inside the current directory recursively
+alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
+
 
 # Ansible
 if command -v ansible &> /dev/null
@@ -76,12 +81,6 @@ if [ -x "$(command -v ranger)" ]; then alias r='ranger .'; fi
 
 # Minikube
 if [ -x "$(command -v minikube)" ]; then alias minikuberestart="minikube delete && minikube start"; fi
-
-# Print all hostnames
-alias hostname='hostname -A'
-
-# Grant execution right to all .sh files inside the current directory recursively
-alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 
 # Open atom in the current directory
 if [ -x "$(command -v atom)" ]; then alias a='atom .'; fi
@@ -142,7 +141,7 @@ fi
 
 if command -v htpasswd &> /dev/null
 then
-alias cryptpass="echo $(htpasswd -bnBC 10 \"\" $CRYPTPASS | tr -d ':\n')"
+alias cryptpass='echo $(htpasswd -bnBC 10 \"\" $CRYPTPASS | tr -d ":\n")'
 fi
 
 # Docker
