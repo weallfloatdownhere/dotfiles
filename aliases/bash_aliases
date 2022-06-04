@@ -193,7 +193,8 @@ fi
 if command -v helm &> /dev/null
 then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
-alias helmcompile='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && helm package --dependency-update ." \;'
+alias helmbuild='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && helm package --dependency-update ." \;'
+alias helmdel='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && rm -rf charts/ *.tgz" \;'
 fi
 
 if command -v kubectl &> /dev/null
