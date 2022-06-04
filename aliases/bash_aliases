@@ -59,6 +59,11 @@ alias rmm="rm -rf"
 # mkdir commands
 alias mkdir="mkdir -p"
 
+if command -v zsh &> /dev/null
+then
+alias sz='source ~/.zshrc'
+fi
+
 if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
 if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch" && chmod +x "$HOME/.local/bin/ch"; fi
 
