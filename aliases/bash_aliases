@@ -4,9 +4,8 @@
 alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
 alias sa='source ~/.aliases'
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
+alias sra='cat ~/.aliases | grep -i'
 
-alias searchalias='cat ~/.aliases | grep -i'
-alias hlp='curl https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/helper.txt'
 alias e="$EDITOR"
 alias v="$VISUAL"
 
