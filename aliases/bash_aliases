@@ -170,6 +170,9 @@ alias doklia='docker image ls --all'
 alias dormi='docker rmi -f $(docker images -a -q)'
 alias dormc='docker rm -vf $(docker ps -a -q)'
 alias dora='docker system prune -f || true && docker rm -vf $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true &&  docker system prune -f || true'
+
+# Docker tools
+alias dokube='docker run -it -v "$(pwd)/:/root/rke/" silentreatmen7/dock-kube:latest'
 fi
 
 if command -v urxvt &> /dev/null
