@@ -36,6 +36,13 @@ alias hostname='hostname -A'
 alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 
 
+# Static installers
+# Kubernetes
+alias install-kns='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
+alias install-kubectx='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
+alias install-helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
+alias install-kubectl='curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
+
 # Ansible
 if command -v ansible &> /dev/null
 then
@@ -88,11 +95,17 @@ if [ -x "$(command -v atom)" ]; then alias a='atom .'; fi
 # peek recorder
 if [ -x "$(command -v peek)" ]; then alias peek='peek --display=$DISPLAY &'; fi
 
-# Python3 shortcut
+# Python3
+if command -v python3 &> /dev/null
+then
 alias p3='python3'
+fi
 
-# Cat a file and put the content in the clipboard
+# Python3
+if command -v xclip &> /dev/null
+then
 alias caty='xclip -sel c <' # copy cotent of the file in clipboard, ex : caty input.txt
+fi
 
 # Restart vmtool service
 alias rvm='sudo systemctl restart vmtoolsd.service'
@@ -176,10 +189,6 @@ alias frall='flux reconcile source git flux-system && flux reconcile kustomizati
 alias fgall='flux get all'
 alias flog='flux logs'
 fi
-
-# Kubernetes
-alias kns-install='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
-alias kctx-install='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
 
 if command -v helm &> /dev/null
 then
