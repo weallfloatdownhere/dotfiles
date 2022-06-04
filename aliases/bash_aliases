@@ -3,6 +3,7 @@
 # Aliases shortcuts
 alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
 alias sa='source ~/.aliases'
+alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
 alias e="$EDITOR"
