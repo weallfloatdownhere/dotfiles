@@ -43,6 +43,7 @@ alias install-kns='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.github
 alias install-kubectx='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
 alias install-helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
 alias install-kubectl='curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
+alias install-argocd='mkdir -p ~/.local/bin/ && curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd'
 
 # Ansible
 if command -v ansible &> /dev/null
