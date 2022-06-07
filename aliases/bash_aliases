@@ -206,7 +206,7 @@ fi
 if command -v kubectl &> /dev/null
 then
 
-alias kshowconf='kubectl config view --minify'
+alias kkk='kubectl config view --minify'
 
 alias kns='kubens'
 alias k='kubectl'
