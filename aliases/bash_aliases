@@ -205,6 +205,9 @@ fi
 
 if command -v kubectl &> /dev/null
 then
+
+alias kshowconf='kubectl config view --minify'
+
 alias kns='kubens'
 alias k='kubectl'
 alias kconf='export KUBECONFIG=$(pwd)/kube_config_cluster.yml'
