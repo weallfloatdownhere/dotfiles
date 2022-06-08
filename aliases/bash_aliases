@@ -60,7 +60,7 @@ fi
 
 if command -v argocd &> /dev/null
 then
-    alias argoshowapps='argocd --server-crt ${KUBECONFIG} --core app list -o name)'
+    alias argoshowapps='argocd --server-crt ${KUBECONFIG} --core app list'
 fi
 
 if command -v argocd-autopilot &> /dev/null
