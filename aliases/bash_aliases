@@ -58,11 +58,16 @@ then
     alias ls='exa -a'
 fi
 
+if command -v argocd &> /dev/null
+then
+    alias argoshowapps='argocd --server-crt ${KUBECONFIG} --core app list -o name)'
+fi
+
 if command -v argocd-autopilot &> /dev/null
 then
     alias argoap='argocd-autopilot'
     alias argoapp='argocd-autopilot project'
-    alias argoapr='argocd-autopilot repo'    
+    alias argoapr='argocd-autopilot repo'
 fi
 
 if command -v zsh &> /dev/null
