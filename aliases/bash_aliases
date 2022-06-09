@@ -204,7 +204,7 @@ fi
 if command -v helm &> /dev/null
 then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
-alias helmbuild='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && helm package --dependency-update ." \;'
+alias helmbuild='for p in $(find . -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up `realpath $p` ; done'
 alias helmclean='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && rm -rf charts/ *.tgz" \;'
 fi
 
