@@ -203,9 +203,10 @@ fi
 
 if command -v helm &> /dev/null
 then
+
 alias helmdry='helm install --generate-name --dry-run --debug --values'
-
-
+alias helmclean='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo rm -rf $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/Chart.lock $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/charts/; done
+'
 alias helmbuildry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm dep build $(dirname $(realpath "$p")); done'
 alias helmbuild='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep build $(dirname $(realpath "$p")); done'
 
