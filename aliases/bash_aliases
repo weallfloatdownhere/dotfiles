@@ -206,7 +206,7 @@ then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
 
 
-alias helmbuilddry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm dep build $(dirname $(realpath "$p")); done'
+alias helmbuildry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm dep build $(dirname $(realpath "$p")); done'
 alias helmbuild='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep build $(dirname $(realpath "$p")); done'
 
 
