@@ -213,6 +213,9 @@ alias helmclean='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/
 '
 alias helmbuild='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep build $(dirname $(realpath "$p")); done'
 
+alias helmpackagedry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm package $(dirname $(realpath "$p")) --destination $(pwd)/releases/; done'
+
+alias helmpackage='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm package $(dirname $(realpath "$p")) --destination $(pwd)/releases/; done'
 
 fi
 
