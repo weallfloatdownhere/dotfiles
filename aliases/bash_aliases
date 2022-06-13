@@ -204,8 +204,12 @@ fi
 if command -v helm &> /dev/null
 then
 alias helmdry='helm install --generate-name --dry-run --debug --values'
-alias helmbuild='for p in $(find . -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up `realpath $p` ; done'
-alias helmclean='find . -maxdepth 1 -not -path ./releases -type d \( ! -name . \) -exec bash -c "cd "{}" && rm -rf charts/ *.tgz" \;'
+
+
+alias helmbuilddry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm dep build $(dirname $(realpath "$p")); done'
+alias helmbuild='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep build $(dirname $(realpath "$p")); done'
+
+
 fi
 
 if command -v kubectl &> /dev/null
