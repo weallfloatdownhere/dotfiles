@@ -160,6 +160,7 @@ if command -v git &> /dev/null
 then
 alias cg='cd `git rev-parse --show-toplevel`'
 alias gst='git status'
+alias gitremote='git config --get remote.origin.url'
 alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
 fi
 
