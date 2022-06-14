@@ -36,7 +36,6 @@ alias hostname='hostname -A'
 # Grant execution right to all .sh files inside the current directory recursively
 alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 
-
 # Static installers
 # Kubernetes
 alias install-kubens='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
@@ -83,6 +82,10 @@ if command -v navi &> /dev/null
 then
 alias navi="navi --fzf-overrides '--layout=reverse --with-nth 1,2 --border=rounded --margin 5% --padding 3%'"
 alias nav="navi"
+fi
+
+if [ -x "$(command -v openssl)" ]; then 
+alias convertopem="openssl x509 -inform der -in ca.cer -out ca.pem"; 
 fi
 
 # kitty
