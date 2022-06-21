@@ -41,7 +41,7 @@ alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 alias install-kubens='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
 alias install-kubectx='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
 alias install-helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
-alias install-kubectl='curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
+alias install-kubectl='mkdir -p ~/.local/bin/ && curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
 alias install-kubeseal='mkdir -p ~/.local/bin/ && curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
 alias install-argocd='mkdir -p ~/.local/bin/ && curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd'
 
@@ -155,7 +155,16 @@ alias vau='vagrant up'
 alias vaup='vagrant up --provision'
 fi
 
-# Git
+# GIT ##################################################################################################################
+function ggl {
+if [ -z "$1" ]; then
+  echo "Get the latest version of a github project in a string format by specifying the repo owner and the repo name."
+  echo "Usage: ggl username/reponame"
+else
+  echo $(curl -L -s "https://api.github.com/repos/$1/releases/latest" | grep -Poe '"tag_name": "\K.*?(?=")' | head -n 1)
+fi
+}
+
 if command -v git &> /dev/null
 then
 alias cg='cd `git rev-parse --show-toplevel`'
@@ -163,6 +172,7 @@ alias gst='git status'
 alias gitremote='git config --get remote.origin.url'
 alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
 fi
+#######################################################################################################################
 
 if command -v htpasswd &> /dev/null
 then
