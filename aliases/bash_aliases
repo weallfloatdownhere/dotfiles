@@ -1,20 +1,27 @@
 # Unix
+export ALIASES_URL="https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases"
 
-# Aliases shortcuts
+# Aliases management
 alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
 alias sa='source ~/.aliases'
 alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
-alias e="$EDITOR"
-alias v="$VISUAL"
-# shortcuts
-alias cltmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
+
+# Utilities
 alias des='cd ~/Desktop'
+
+# Temporary actions
+alias clrtmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
 alias ctmp='cd $(mktemp -d)'
+
+# Permissions
 alias cx='chmod +x'
 alias cown='sudo chown -R $USER:USER'
+
+# Greps
 alias gi='grep -i'
+
 # ls commands
 alias ls="ls --color"
 alias ll="ls -l"
@@ -25,14 +32,31 @@ alias lla='ls -l'
 alias lt='ls --tree'
 alias ip='ip -c'
 alias rm='rm -i'
+
+# Downloads
+
+function dwnext {
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Download and extract an tar.gz archive."
+  echo "Usage: dwnext {URL}.tar.gz {DESTINATION}"
+else
+  mkdir -p "$2"
+  curl -L "$1" | tar zxv -C "$2"
+fi
+}
+
 # browsers
 alias bop='python3 -mwebbrowser' # browser open: bop [url]
+
 # rm commands
 alias rmm="rm -rf"
+
 # mkdir commands
 alias mkdir="mkdir -p"
+
 # Print all hostnames
 alias hostname='hostname -A'
+
 # Grant execution right to all .sh files inside the current directory recursively
 alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 
@@ -85,7 +109,7 @@ alias nav="navi"
 fi
 
 if [ -x "$(command -v openssl)" ]; then 
-alias convertopem="openssl x509 -inform der -in ca.cer -out ca.pem"; 
+alias convert.topem="openssl x509 -inform der -in ca.cer -out ca.pem"; 
 fi
 
 # kitty
