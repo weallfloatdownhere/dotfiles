@@ -38,7 +38,7 @@ alias ip='ip -c'
 alias rm='rm -i'
 
 # Downloads
-function dwnext {
+function downext {
 if [ -z "$1" ] || [ -z "$2" ]; then
   echo "Download and extract an tar.gz archive."
   echo "Usage: dwnext {URL}.tar.gz {DESTINATION}"
