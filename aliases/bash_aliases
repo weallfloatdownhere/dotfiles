@@ -8,10 +8,14 @@ alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
 
-# Utilities
-alias des='cd ~/Desktop'
+# Encryptions
+if command -v git-crypt &> /dev/null
+then
+    alias test.gitcrypt='git-crypt status -e'
+fi
 
-# Temporary actions
+# cd
+alias des='cd ~/Desktop'
 alias clrtmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
 alias ctmp='cd $(mktemp -d)'
 
@@ -34,7 +38,6 @@ alias ip='ip -c'
 alias rm='rm -i'
 
 # Downloads
-
 function dwnext {
 if [ -z "$1" ] || [ -z "$2" ]; then
   echo "Download and extract an tar.gz archive."
