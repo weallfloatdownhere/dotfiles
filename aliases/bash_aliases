@@ -37,6 +37,9 @@ alias lt='ls --tree'
 alias ip='ip -c'
 alias rm='rm -i'
 
+# history
+alias hgi='history | grep -i'
+
 # Downloads
 function downext {
 if [ -z "$1" ] || [ -z "$2" ]; then
