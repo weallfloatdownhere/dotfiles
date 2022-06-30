@@ -303,7 +303,7 @@ alias kdappa='kubectl describe application -A'
 alias kgappa='kubectl get application -A'
 alias kdelapp='kubectl delete application'
 
-alias kdry='kubectl --dry-run=client -o yaml apply -f'
+alias kdry='kubectl --dry-run=client -o yaml apply'
 
 alias kgsec='kubectl get -o wide secret'
 alias kgseca='kubectl get -o wide secret -A'
