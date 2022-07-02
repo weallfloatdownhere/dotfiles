@@ -265,6 +265,11 @@ fi
 if command -v kubectl &> /dev/null
 then
 
+if command -v kubectl-slice &> /dev/null
+then
+alias kslice='kubectl-slice'
+fi
+
 alias kkk='kubectl config view --minify'
 alias kwatch='watch kubectl get pods -A'
 alias kns='kubens'
