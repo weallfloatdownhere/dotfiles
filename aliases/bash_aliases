@@ -41,7 +41,7 @@ alias rm='rm -i'
 alias hgi='history | grep -i'
 
 # Downloads
-function downext {
+function dwnext {
 if [ -z "$1" ] || [ -z "$2" ]; then
   echo "Download and extract an tar.gz archive."
   echo "Usage: dwnext {URL}.tar.gz {DESTINATION}"
