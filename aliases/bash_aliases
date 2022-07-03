@@ -268,6 +268,10 @@ then
 if command -v helm &> /dev/null
 then
 alias khelm='kubectl kustomize --enable-helm'
+if command -v kubectl-slice &> /dev/null
+then
+alias khelmslice='rm -rf _out && mkdir _out && kubectl kustomize --enable-helm | kubectl-slice -o _out/'
+fi
 fi
 
 if command -v kubectl-slice &> /dev/null
