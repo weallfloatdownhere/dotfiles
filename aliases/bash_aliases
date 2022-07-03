@@ -262,17 +262,23 @@ alias helmpackage='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r 
 alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up $(dirname $(realpath "$p")); done'
 fi
 
-if command -v kubectl &> /dev/null
+if command -v kustomize &> /dev/null
 then
 
-if command -v helm &> /dev/null
-then
-alias khelm='kubectl kustomize --enable-helm'
-if command -v kubectl-slice &> /dev/null
-then
-alias khelmslice='rm -rf _out && mkdir _out && kubectl kustomize --enable-helm | kubectl-slice -o _out/'
+if [ -z "$1" ]; then
+echo "Please provide an object to build."
+echo "eg: kustomizeIt base/"
+else
+function kustomizeIt {
+  kustomize build \
+    --enable-helm \
+    --helm-command $helmCommand \
+    ./$1
+}
 fi
-fi
+
+if command -v kubectl &> /dev/null
+then
 
 if command -v kubectl-slice &> /dev/null
 then
