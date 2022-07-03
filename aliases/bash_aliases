@@ -265,6 +265,11 @@ fi
 if command -v kubectl &> /dev/null
 then
 
+if command -v helm &> /dev/null
+then
+alias khelm='kubectl kustomize --enable-helm'
+fi
+
 if command -v kubectl-slice &> /dev/null
 then
 alias kslice='kubectl-slice'
