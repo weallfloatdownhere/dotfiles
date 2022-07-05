@@ -14,6 +14,8 @@ then
     alias test.gitcrypt='git-crypt status -e'
 fi
 
+alias h='history'
+
 # cd
 alias des='cd ~/Desktop'
 alias clrtmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
