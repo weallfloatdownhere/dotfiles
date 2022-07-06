@@ -1,6 +1,18 @@
 # Unix
 export ALIASES_URL="https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases"
 
+if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
+if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch" && chmod +x "$HOME/.local/bin/ch"; fi
+
+# Static installers
+alias install-kubens='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
+alias install-kubectx='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
+alias install-helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
+alias install-kubectl='mkdir -p ~/.local/bin/ && curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
+alias install-kubeseal='mkdir -p ~/.local/bin/ && curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
+alias install-kube-slice='mkdir -p ~/.local/bin && curl -L --silent https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/bin -xzv'
+alias install-argocd='mkdir -p ~/.local/bin/ && curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd'
+
 # Aliases management
 alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
 alias sa='source ~/.aliases'
@@ -8,25 +20,29 @@ alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
 
-# Encryptions
-if command -v git-crypt &> /dev/null
-then
-    alias test.gitcrypt='git-crypt status -e'
-fi
-
+# Bash
+# ----------------------------------------------------------------------------------------------------------
+# History
 alias h='history'
+alias hgi='history | grep -i'
+
+# Permissions
+# Grant execution right to all .sh files inside the current directory recursively
+alias cx='chmod +x'
+alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
+alias cown='sudo chown -R $USER:USER'
+
+# Mkdir
+alias mkdir="mkdir -p"
+
+# System infos
+# Print all hostnames
+alias hostname='hostname -A'
 
 # cd
 alias des='cd ~/Desktop'
 alias clrtmp='(rm -rf /tmp/* || true) && echo "TEMPORARY DIRECTORY CLEANED SUCCESSFULLY."'
 alias ctmp='cd $(mktemp -d)'
-
-# Permissions
-alias cx='chmod +x'
-alias cown='sudo chown -R $USER:USER'
-
-# Greps
-alias gi='grep -i'
 
 # ls commands
 alias ls="ls --color"
@@ -37,10 +53,16 @@ alias la='ls'
 alias lla='ls -l'
 alias lt='ls --tree'
 alias ip='ip -c'
-alias rm='rm -i'
 
-# history
-alias hgi='history | grep -i'
+# Greps
+alias gi='grep -i'
+
+# rm commands
+alias rm='rm -i'
+alias rmm="rm -rf"
+
+# Dos2unix recursive
+alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 
 # Downloads
 function dwnext {
@@ -53,60 +75,40 @@ else
 fi
 }
 
-# browsers
-alias bop='python3 -mwebbrowser' # browser open: bop [url]
-
-# rm commands
-alias rmm="rm -rf"
-
-# mkdir commands
-alias mkdir="mkdir -p"
-
-# Print all hostnames
-alias hostname='hostname -A'
-
-# Grant execution right to all .sh files inside the current directory recursively
-alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
-
-# Static installers
-# Kubernetes
-alias install-kubens='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
-alias install-kubectx='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
-alias install-helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
-alias install-kubectl='mkdir -p ~/.local/bin/ && curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
-alias install-kubeseal='mkdir -p ~/.local/bin/ && curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
-alias install-kube-slice='mkdir -p ~/.local/bin && curl -L --silent https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/bin -xzv'
-alias install-argocd='mkdir -p ~/.local/bin/ && curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd'
+# GIT ##################################################################################################################
+function git.getlatest {
+if [ -z "$1" ]; then
+  echo "Get the latest version of a github project in a string format by specifying the repo owner and the repo name."
+  echo "Usage: ggl username/reponame"
+else
+  echo $(curl -L -s "https://api.github.com/repos/$1/releases/latest" | grep -Poe '"tag_name": "\K.*?(?=")' | head -n 1)
+fi
+}
+alias cg='cd `git rev-parse --show-toplevel`'
+alias gst='git status'
+alias gitremote='git config --get remote.origin.url'
+alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
 
 # Ansible
-if command -v ansible &> /dev/null
-then
-    alias ansiblefacts='ansible localhost -m ansible.builtin.setup'
-fi
+alias ansiblefacts='ansible localhost -m ansible.builtin.setup'
 
-if command -v zsh &> /dev/null
-then
-alias sz='source ~/.zshrc'
+# Encryptions
+alias crypt.gitcrypt='git-crypt status -e'
+alias crypt.certToPem="openssl x509 -inform der -in ca.cer -out ca.pem"; 
+function crypt.bcryptPassword {
+if [ -z "$1" ]; then
+  echo "Encrypting a string using htpasswd Bcrypt."
+  echo "Usage: crypt.bcryptPassword [STRING]"
+else
+  echo -n htpasswd -bnBC 10 \"\" $1 | tr -d ":\n")
 fi
-
-if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
-if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch" && chmod +x "$HOME/.local/bin/ch"; fi
+}
 
 # navi
-if command -v navi &> /dev/null
-then
 alias navi="navi --fzf-overrides '--layout=reverse --with-nth 1,2 --border=rounded --margin 5% --padding 3%'"
-fi
-
-if [ -x "$(command -v openssl)" ]; then 
-alias convert.topem="openssl x509 -inform der -in ca.cer -out ca.pem"; 
-fi
 
 # kitty
-if [ -x "$(command -v kitty)" ]; then alias icat="kitty +kitten icat"; fi
-
-# Dos2unix recursive
-if [ -x "$(command -v dos2unix)" ]; then alias d2u='find . -type f -print0 | xargs -0 dos2unix'; fi
+alias icat="kitty +kitten icat"
 
 # Ranger
 if [ -x "$(command -v ranger)" ]; then alias r='ranger .'; fi
@@ -132,14 +134,10 @@ alias caty='xclip -sel c <' # copy cotent of the file in clipboard, ex : caty in
 fi
 
 # Mullvad
-if command -v openvpn &> /dev/null
-then
 alias vpn='sudo openvpn --config'
-if command -v gp-saml-gui &> /dev/null; then alias gpvpn='gp-saml-gui --clientos Windows --gateway --no-verify'; fi
-fi
+alias gpvpn='gp-saml-gui --clientos Windows --gateway --no-verify'
 
-if command -v kb &> /dev/null
-then
+# Knowledge base
 alias kbl="kb list"
 alias kbe="kb edit"
 alias kba="kb add"
@@ -147,44 +145,14 @@ alias kbv="kb view"
 alias kbd="kb delete --id"
 alias kbg="kb grep"
 alias kbt="kb list --tags"
-fi
 
 # Vagrant
-if command -v vagrant &> /dev/null
-then
 alias va='vagrant'
 alias vadf='vagrant destroy -f'
 alias vau='vagrant up'
 alias vaup='vagrant up --provision'
-fi
-
-# GIT ##################################################################################################################
-function ggl {
-if [ -z "$1" ]; then
-  echo "Get the latest version of a github project in a string format by specifying the repo owner and the repo name."
-  echo "Usage: ggl username/reponame"
-else
-  echo $(curl -L -s "https://api.github.com/repos/$1/releases/latest" | grep -Poe '"tag_name": "\K.*?(?=")' | head -n 1)
-fi
-}
-
-if command -v git &> /dev/null
-then
-alias cg='cd `git rev-parse --show-toplevel`'
-alias gst='git status'
-alias gitremote='git config --get remote.origin.url'
-alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
-fi
-#######################################################################################################################
-
-if command -v htpasswd &> /dev/null
-then
-alias cryptpass='echo $(htpasswd -bnBC 10 \"\" $CRYPTPASS | tr -d ":\n")'
-fi
 
 # Docker
-if command -v docker &> /dev/null
-then
 alias dr='docker run -it '
 alias dok='docker'
 alias dokb='docker build'
@@ -193,33 +161,23 @@ alias doklia='docker image ls --all'
 alias dormi='docker rmi -f $(docker images -a -q)'
 alias dormc='docker rm -vf $(docker ps -a -q)'
 alias dora='docker system prune -f || true && docker rm -vf $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true &&  docker system prune -f || true'
-
-# Docker tools
 alias dokube='docker run -it -v "$(pwd)/:/root/rke/" silentreatmen7/dock-kube:latest'
-fi
 
-if command -v urxvt &> /dev/null
-then
+# Terminal
 alias rxvt-unicode='urxvt'
-fi
 
-if command -v tmux &> /dev/null
-then
+# Tmux
 alias tm='tmux'
-fi
 
-if command -v flux &> /dev/null
-then
+# FluxCD2
 alias frh='flux reconcile helmrelease'
 alias frs='flux reconcile source'
 alias frk='flux reconcile kustomization'
 alias frall='flux reconcile source git flux-system && flux reconcile kustomization flux-system applications core --with-source'
 alias fgall='flux get all'
 alias flog='flux logs'
-fi
 
-if command -v helm &> /dev/null
-then
+# Helm
 alias helmdry='helm install --generate-name --dry-run --debug --values'
 alias helmcleandry='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo rm -rf $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/Chart.lock $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/charts/; done
 '
@@ -231,16 +189,12 @@ alias helmclean='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/
 alias helmbuild='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep build $(dirname $(realpath "$p")); done'
 alias helmpackage='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm package $(dirname $(realpath "$p")) --destination $(pwd)/releases/; done'
 alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up $(dirname $(realpath "$p")); done'
-fi
 
-if command -v kubectl &> /dev/null; then
+# Kustomize
+kz='kustomize'
+kzb='kustomize build --enable-helm --helm-command /bin/helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
 
-    if command -v kustomize &> /dev/null; then
-        kz='kustomize'
-        kzb='kustomize build --enable-helm --helm-command /bin/helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
-        # KUSTOMIZE ##################################################################################################################
-    fi
-
+# Kubectl
 alias kkk='kubectl config view --minify'
 alias kwatch='watch kubectl get pods -A'
 alias kns='kubens'
@@ -403,4 +357,3 @@ alias kgex='kubectl get -o wide exchange'
 alias kdexa='kubectl describe exchange -A'
 alias kdex='kubectl describe exchange'
 alias kgcc='kubectl config current-context'
-fi
