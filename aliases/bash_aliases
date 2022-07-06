@@ -234,20 +234,11 @@ alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/
 fi
 
 if command -v kubectl &> /dev/null; then
+
     if command -v kustomize &> /dev/null; then
         kz='kustomize'
         kzb='kustomize build --enable-helm --helm-command /bin/helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
         # KUSTOMIZE ##################################################################################################################
-        function kzc {
-        if [ -z "$1" ]; then
-            echo "Generate a kustomization.yaml file in the current directory. The parameter is meant to be an opinionated way to labels resources."
-            echo "Usage: kzc [{argocd, none}]"
-            echo "Example: kzc argocd"
-        else
-            if [ "$1" == "argocd"]; then COMMONLABELS='--labels "app.kubernetes.io/managed-by: argocd"'; fi
-            kustomize create --autodetect "${COMMONLABELS:=''}" . 
-        fi
-        }
     fi
 
 alias kkk='kubectl config view --minify'
