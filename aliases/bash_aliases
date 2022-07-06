@@ -240,10 +240,12 @@ if command -v kubectl &> /dev/null; then
         # KUSTOMIZE ##################################################################################################################
         function kzc {
         if [ -z "$1" ]; then
-            echo "Get the latest version of a github project in a string format by specifying the repo owner and the repo name."
-            echo "Usage: ggl username/reponame"
+            echo "Generate a kustomization.yaml file in the current directory. The parameter is meant to be an opinionated way to labels resources."
+            echo "Usage: kzc [{argocd, none}]"
+            echo "Example: kzc argocd"
         else
-            kustomize create --autodetect --labels "app.kubernetes.io/managed-by: argocd" . 
+            if [ "$1" == "argocd"]; then COMMONLABELS='--labels "app.kubernetes.io/managed-by: argocd"'; fi
+            kustomize create --autodetect "${COMMONLABELS:=''}" . 
         fi
         }
     fi
