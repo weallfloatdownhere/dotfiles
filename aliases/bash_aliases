@@ -84,24 +84,6 @@ then
     alias ansiblefacts='ansible localhost -m ansible.builtin.setup'
 fi
 
-# ls specifics
-if command -v exa &> /dev/null
-then
-    alias ls='exa -a'
-fi
-
-if command -v argocd &> /dev/null
-then
-    alias argoshowapps='argocd --server-crt ${KUBECONFIG} --core app list'
-fi
-
-if command -v argocd-autopilot &> /dev/null
-then
-    alias argoap='argocd-autopilot'
-    alias argoapp='argocd-autopilot project'
-    alias argoapr='argocd-autopilot repo'
-fi
-
 if command -v zsh &> /dev/null
 then
 alias sz='source ~/.zshrc'
@@ -114,7 +96,6 @@ if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.lo
 if command -v navi &> /dev/null
 then
 alias navi="navi --fzf-overrides '--layout=reverse --with-nth 1,2 --border=rounded --margin 5% --padding 3%'"
-alias nav="navi"
 fi
 
 if [ -x "$(command -v openssl)" ]; then 
@@ -145,27 +126,16 @@ then
 alias p3='python3'
 fi
 
-# Python3
 if command -v xclip &> /dev/null
 then
 alias caty='xclip -sel c <' # copy cotent of the file in clipboard, ex : caty input.txt
 fi
 
-# Restart vmtool service
-alias rvm='sudo systemctl restart vmtoolsd.service'
-
 # Mullvad
 if command -v openvpn &> /dev/null
 then
-alias mullvad='sudo openvpn --config'
-alias mulvad='sudo openvpn --config'
-alias mulv='sudo openvpn --config'
-alias muvad='sudo openvpn --config'
-fi
-
-if command -v gp-saml-gui &> /dev/null
-then
-alias gpvpn='gp-saml-gui --clientos Windows --gateway --no-verify'
+alias vpn='sudo openvpn --config'
+if command -v gp-saml-gui &> /dev/null; then alias gpvpn='gp-saml-gui --clientos Windows --gateway --no-verify'; fi
 fi
 
 if command -v kb &> /dev/null
@@ -250,7 +220,6 @@ fi
 
 if command -v helm &> /dev/null
 then
-
 alias helmdry='helm install --generate-name --dry-run --debug --values'
 alias helmcleandry='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo rm -rf $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/Chart.lock $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/charts/; done
 '
@@ -264,15 +233,20 @@ alias helmpackage='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r 
 alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up $(dirname $(realpath "$p")); done'
 fi
 
-if command -v kustomize &> /dev/null
-then
-kzb='kustomize build --enable-helm --helm-command /bin/helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
-fi
-
-if command -v kubectl-slice &> /dev/null
-then
-alias kslice='kubectl-slice'
-fi
+if command -v kubectl &> /dev/null; then
+    if command -v kustomize &> /dev/null; then
+        kz='kustomize'
+        kzb='kustomize build --enable-helm --helm-command /bin/helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
+        # KUSTOMIZE ##################################################################################################################
+        function kzc {
+        if [ -z "$1" ]; then
+            echo "Get the latest version of a github project in a string format by specifying the repo owner and the repo name."
+            echo "Usage: ggl username/reponame"
+        else
+            kustomize create --autodetect --labels "app.kubernetes.io/managed-by: argocd" . 
+        fi
+        }
+    fi
 
 alias kkk='kubectl config view --minify'
 alias kwatch='watch kubectl get pods -A'
@@ -283,38 +257,29 @@ alias kclrconf='rm -rf $HOME/.kube && mkdir $HOME/.kube && cp $(pwd)/kube_config
 alias kconfall='export KUBECONFIG= && for kubeconfigFile in `find "$(pwd)" -type f -name "*.yaml" -o -name "kube*config*"` do; export KUBECONFIG="$kubeconfigFile:$KUBECONFIG" done;'
 alias kconfi='mkdir $HOME/.kube && cp $(pwd)/kube_config_cluster.yml $HOME/.kube/config --backup=t && export KUBECONFIG=$HOME/.kube/config'
 alias kgsf='kubectl get -o wide statefulset'
-# print kubernetes cluster info
 alias kclinfo='kubectl cluster-info'
-# print kubernetes cluster info verbose
 alias kclview='kubectl config view'
-# print the whole cluster log dump
 alias kcldebug='kubectl cluster-info dump'
-
 alias kgseaa='kubectl get serviceaccount -A'
 alias kgsea='kubectl get serviceaccount -A'
 alias kdseaa='kubectl describe serviceaccount -A'
 alias kdsea='kubectl describe serviceaccount'
-
 alias kdelaps='kubectl delete applicationset'
 alias kdaps='kubectl describe applicationset'
 alias kdapsa='kubectl describe applicationset -A'
 alias kgaps='kubectl get applicationset'
 alias kgapsa='kubectl get applicationset -A'
-
 alias kgdep='kubectl get deploy'
 alias kddep='kubectl describe deploy'
 alias kdepa='kubectl describe deploy -A'
 alias kgdepa='kubectl get deploy -A'
 alias kdeldep='kubectl delete deploy'
-
 alias kgapp='kubectl get application'
 alias kdapp='kubectl describe application'
 alias kdappa='kubectl describe application -A'
 alias kgappa='kubectl get application -A'
 alias kdelapp='kubectl delete application'
-
 alias kdry='kubectl --dry-run=client -o yaml'
-
 alias kgsec='kubectl get -o wide secret'
 alias kgseca='kubectl get -o wide secret -A'
 alias kgs='kubectl get -o wide service'
