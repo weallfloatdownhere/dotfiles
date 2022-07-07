@@ -196,7 +196,7 @@ alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/
 alias kz='kustomize'
 alias kzc='kustomize create --autodetect'
 alias kzcr='kustomize create --autodetect --recursive'
-alias kzb='kustomize build --enable-helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
+alias kzb='kustomize build --enable-helm --enable-alpha-plugins --load-restrictor=LoadRestrictionsNone'
 
 # Kubectl
 alias kkk='kubectl config view --minify'
