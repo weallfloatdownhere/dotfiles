@@ -102,7 +102,7 @@ if [ -z "$1" ]; then
   echo "Encrypting a string using htpasswd Bcrypt."
   echo "Usage: crypt.bcryptPassword [STRING]"
 else
-  echo -n htpasswd -bnBC 10 \"\" $1 | tr -d ":\n")
+  echo -n htpasswd -bnBC 10 \"\" $1 | tr -d ":\n"
 fi
 }
 
