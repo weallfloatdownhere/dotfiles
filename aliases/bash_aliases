@@ -5,13 +5,14 @@ if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
 if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch" && chmod +x "$HOME/.local/bin/ch"; fi
 
 # Static installers
-alias install-kubens='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens && chmod +x ~/.local/bin/kubens'
-alias install-kubectx='mkdir -p ~/.local/bin/ && curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx && chmod +x ~/.local/bin/kubectx'
-alias install-helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
-alias install-kubectl='mkdir -p ~/.local/bin/ && curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl && chmod +x ~/.local/bin/kubectl'
-alias install-kubeseal='mkdir -p ~/.local/bin/ && curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
-alias install-kube-slice='mkdir -p ~/.local/bin && curl -L --silent https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/bin -xzv'
-alias install-argocd='mkdir -p ~/.local/bin/ && curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd && chmod +x ~/.local/bin/argocd'
+alias install.kubens='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
+alias install.kubectx='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx'
+alias install.helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
+alias install.kubectl='curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl'
+alias install.kubeseal='curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
+alias install.kube-slice='curl -L --silent https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/.local/bin -xzv'
+alias install.argocd='curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd'
+alias install.kind='curl -L --silent https://github.com/kubernetes-sigs/kind/releases/download/v0.14.0/kind-darwin-arm64 -o ~/.local/bin/kind'
 
 # Aliases management
 alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
