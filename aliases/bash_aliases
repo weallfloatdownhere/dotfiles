@@ -16,7 +16,7 @@ alias install.argocd='curl -sSL https://github.com/argoproj/argo-cd/releases/lat
 alias install.kind='curl -L --silent https://github.com/kubernetes-sigs/kind/releases/download/v0.14.0/kind-darwin-arm64 -o ~/.local/bin/kind'
 
 # Aliases management
-alias ra="curl -L --silent $ALIASES_URL -o ~/.aliases"
+alias ra="rm -rf ~/.aliases && curl -H 'Cache-Control: no-cache, no-store' -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sa='source ~/.aliases'
 alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
