@@ -8,6 +8,7 @@ if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.lo
 alias install.kubens='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
 alias install.kubectx='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx'
 alias install.helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
+alias install.kustomize='curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash'
 alias install.kubectl='curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl'
 alias install.kubeseal='curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
 alias install.kube-slice='curl -L --silent https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/.local/bin -xzv'
