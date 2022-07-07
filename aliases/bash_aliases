@@ -193,8 +193,8 @@ alias helmpackage='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r 
 alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up $(dirname $(realpath "$p")); done'
 
 # Kustomize
-kz='kustomize'
-kzb='kustomize build --enable-helm --helm-command /bin/helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
+alias kz='kustomize'
+alias kzb='kustomize build --enable-helm --enable-alpha-plugins --load-restrictor LoadRestrictionsNone'
 
 # Kubectl
 alias kkk='kubectl config view --minify'
