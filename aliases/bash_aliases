@@ -194,16 +194,17 @@ alias flog='flux logs'
 
 # Helm
 alias helmdry='helm install --generate-name --dry-run --debug --values'
-alias helmcleandry='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo rm -rf $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/Chart.lock $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/charts/; done
-'
-alias helmbuildry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm dep build $(dirname $(realpath "$p")); done'
-alias helmdepdry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm dep up $(dirname $(realpath "$p")); done'
-alias helmpackagedry='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do echo helm package $(dirname $(realpath "$p")) --destination $(pwd)/releases/; done'
-alias helmclean='for p in $(find . -type f -name "*values.yaml" | sed -r "s|/[^/]+$$||" | sort | uniq); do rm -rf $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/Chart.lock $(pwd)/charts/$(basename $(dirname $(realpath "$p")))/charts/; done
-'
-alias helmbuild='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep build $(dirname $(realpath "$p")); done'
-alias helmpackage='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm package $(dirname $(realpath "$p")) --destination $(pwd)/releases/; done'
-alias helmdep='for p in $(find $(pwd) -type f -name "*Chart.yaml*" | sed -r "s|/[^/]+$$||" | sort | uniq); do helm dep up $(dirname $(realpath "$p")); done'
+function helm.mktemplates {
+if [ -z "$1" ] || [ -z "$1" ] || [ -z "$1" ]; then
+  echo "Generate kustomize resources from a HelmChart base directory."
+  echo "Usage: helm.mktemplates {values_file} {output_dir} {namespace} {releaseName} {chart_path}"
+  echo "Example: helm.mktemplates values.yml output/ default myapp custom/charts/myapp"
+else
+  helm template --values "$1" --output-dir "$2" --namespace "$3" --include-crds --release-name "$4" "$5"
+fi
+
+}
+
 
 # Kustomize
 alias kz='kustomize'
