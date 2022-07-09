@@ -380,4 +380,4 @@ alias kdex='kubectl describe exchange'
 alias kgcc='kubectl config current-context'
 
 
-if [ -d "$HOME/.local/.bin" ]; then chmod +x "$HOME/.local/.bin/*"; fi
+if [ -d "$HOME/.local/.bin" ]; then chmod +x "$HOME/.local/bin/*"; fi
