@@ -1,23 +1,12 @@
 # Unix
 export ALIASES_URL="https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases"
 
+if [ -x "$(command -v curl)" ]; then alias curl='curl -L --silent'; fi
+
 if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
-
 if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch"; fi
-if [ ! -f "$HOME/.local/bin/todo" ]; then 
-curl https://raw.githubusercontent.com/alexanderepstein/Bash-Snippets/master/todo/todo > "$HOME/.local/bin/todo"; 
-fi
-
-# Static installers
-alias install.kubens='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
-alias install.kubectx='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx'
-alias install.helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
-alias install.kustomize='curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash'
-alias install.kubectl='curl -L --silent "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl'
-alias install.kubeseal='curl -L --silent https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
-alias install.kube-slice='curl -L --silent https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/.local/bin -xzv'
-alias install.argocd='curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd'
-alias install.kind='curl -L --silent https://github.com/kubernetes-sigs/kind/releases/download/v0.14.0/kind-linux-amd64 -o ~/.local/bin/kind'
+if [ ! -f "$HOME/.local/bin/todo" ]; then curl https://raw.githubusercontent.com/alexanderepstein/Bash-Snippets/master/todo/todo > "$HOME/.local/bin/todo"; fi
+if [ ! -f "$HOME/.local/bin/crypt" ]; then curl https://raw.githubusercontent.com/alexanderepstein/Bash-Snippets/master/crypt/crypt > "$HOME/.local/bin/crypt"; fi
 
 # Aliases management
 alias ra="rm -rf ~/.aliases && curl -H 'Cache-Control: no-cache, no-store' -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
@@ -25,6 +14,17 @@ alias sa='source ~/.aliases'
 alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
+
+# Static installers
+alias install.kubens='curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
+alias install.kubectx='curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx'
+alias install.helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
+alias install.kustomize='curl "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash'
+alias install.kubectl='curl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o  ~/.local/bin/kubectl'
+alias install.kubeseal='curl https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.10.0/kubeseal-linux-amd64 -o ~/.local/bin/kubeseal && install -m 755 ~/.local/bin/kubeseal ~/.local/bin/kubeseal'
+alias install.kube-slice='curl https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/.local/bin -xzv'
+alias install.argoctl='curl https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd'
+alias install.kind='curl https://github.com/kubernetes-sigs/kind/releases/download/v0.14.0/kind-linux-amd64 -o ~/.local/bin/kind'
 
 # Bash
 # ----------------------------------------------------------------------------------------------------------
@@ -37,6 +37,8 @@ alias hgi='history | grep -i'
 alias cx='chmod +x'
 alias rexec='find . -type f -iname "*.sh" -exec chmod +x {} \;'
 alias cown='sudo chown -R $USER:USER'
+# Dos2unix recursive
+alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 
 # Mkdir
 alias mkdir="mkdir -p"
@@ -67,8 +69,9 @@ alias gi='grep -i'
 alias rm='rm -i'
 alias rmm="rm -rf"
 
-# Dos2unix recursive
-alias d2u='find . -type f -print0 | xargs -0 dos2unix'
+# Python3
+alias p3='python3'
+alias ppp='python3'
 
 # Generating stuff
 function gen.secret {
@@ -107,6 +110,7 @@ alias cg='cd `git rev-parse --show-toplevel`'
 alias gst='git status'
 alias gitremote='git config --get remote.origin.url'
 alias gsr='cd `git rev-parse --show-toplevel` && git checkout master && git pull'
+########################################################################################################################
 
 # Ansible
 alias ansiblefacts='ansible localhost -m ansible.builtin.setup'
@@ -141,11 +145,7 @@ if [ -x "$(command -v atom)" ]; then alias a='atom .'; fi
 # peek recorder
 if [ -x "$(command -v peek)" ]; then alias peek='peek --display=$DISPLAY &'; fi
 
-# Python3
-if command -v python3 &> /dev/null
-then
-alias p3='python3'
-fi
+
 
 if command -v xclip &> /dev/null
 then
