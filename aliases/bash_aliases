@@ -2,7 +2,11 @@
 export ALIASES_URL="https://raw.githubusercontent.com/weallfloatdownhere/dotfiles/main/aliases/bash_aliases"
 
 if [ ! -d "$HOME/.local/bin" ]; then mkdir -p "$HOME/.local/bin"; fi
-if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch" && chmod +x "$HOME/.local/bin/ch"; fi
+
+if [ ! -f "$HOME/.local/bin/ch" ]; then curl https://cht.sh/:cht.sh > "$HOME/.local/bin/ch"; fi
+if [ ! -f "$HOME/.local/bin/todo" ]; then 
+curl https://raw.githubusercontent.com/alexanderepstein/Bash-Snippets/master/todo/todo > "$HOME/.local/bin/todo"; 
+fi
 
 # Static installers
 alias install.kubens='curl -L --silent https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
@@ -205,7 +209,6 @@ fi
 
 }
 
-
 # Kustomize
 alias kz='kustomize'
 alias kzc='kustomize create --autodetect'
@@ -375,3 +378,6 @@ alias kgex='kubectl get -o wide exchange'
 alias kdexa='kubectl describe exchange -A'
 alias kdex='kubectl describe exchange'
 alias kgcc='kubectl config current-context'
+
+
+if [ -d "$HOME/.local/.bin" ]; then chmod +x "$HOME/.local/.bin/*"; fi
