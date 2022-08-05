@@ -15,6 +15,18 @@ alias oa="vi ~/.aliases"
 alias rasa="curl -L --silent $ALIASES_URL -o ~/.aliases && source ~/.aliases"
 alias sra='cat ~/.aliases | grep -i'
 
+function foreachdir {
+if [ -z "$1" ] || [ -z "$2" ]; then
+echo "USAGE"
+echo "foreachdir [DIRECTORY] [COMMAND]"
+echo "eg: forearchdir . ls"
+else
+for d in "$1" ; do
+    bash -c "(cd $1 && $2)"
+done
+fi
+}
+
 # Static installers
 alias install.kubens='curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
 alias install.kubectx='curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx'
