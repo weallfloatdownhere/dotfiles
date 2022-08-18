@@ -28,6 +28,7 @@ fi
 }
 
 # Static installers
+if [ -d ~/.local/bin/ ]; then chmod +x ~/.local/bin/*; fi
 alias install.kubens='curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens -o ~/.local/bin/kubens'
 alias install.kubectx='curl https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx -o ~/.local/bin/kubectx'
 alias install.helm='curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash'
@@ -37,6 +38,7 @@ alias install.kubeseal='curl https://github.com/bitnami-labs/sealed-secrets/rele
 alias install.kube-slice='curl https://github.com/patrickdappollonio/kubectl-slice/releases/download/v1.2.3/kubectl-slice_1.2.3_linux_x86_64.tar.gz | tar -C ~/.local/bin -xzv'
 alias install.argoctl='curl https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o ~/.local/bin/argocd'
 alias install.kind='curl https://github.com/kubernetes-sigs/kind/releases/download/v0.14.0/kind-linux-amd64 -o ~/.local/bin/kind'
+alias install.age='curl https://github.com/FiloSottile/age/releases/download/v1.0.0/age-v1.0.0-linux-amd64.tar.gz | tar -C ~/.local/bin -xzv'
 
 # Bash
 # ----------------------------------------------------------------------------------------------------------
