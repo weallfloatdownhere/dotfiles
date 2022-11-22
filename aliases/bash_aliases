@@ -197,6 +197,13 @@ alias dormc='docker rm -vf $(docker ps -a -q)'
 alias dora='docker system prune -f || true && docker rm -vf $(docker ps -a -q) || true && docker rmi -f $(docker images -a -q) || true &&  docker system prune -f || true'
 alias dokube='docker run -it -v "$(pwd)/:/root/rke/" silentreatmen7/dock-kube:latest'
 
+# Vscode and Codium
+if command -v codium &> /dev/null
+then
+alias codi='codium'
+fi
+
+
 # Terminal
 alias rxvt-unicode='urxvt'
 
