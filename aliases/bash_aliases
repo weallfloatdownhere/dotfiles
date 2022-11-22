@@ -151,6 +151,9 @@ alias icat="kitty +kitten icat"
 # Ranger
 if [ -x "$(command -v ranger)" ]; then alias r='ranger .'; fi
 
+#pip
+if [ -x "$(command -v pip3)" ]; then alias pip3up='pip3 install --upgrade pip'; fi
+
 # Minikube
 if [ -x "$(command -v minikube)" ]; then alias minikuberestart="minikube delete && minikube start"; fi
 
