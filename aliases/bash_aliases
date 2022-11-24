@@ -163,7 +163,8 @@ if [ -x "$(command -v atom)" ]; then alias a='atom .'; fi
 # peek recorder
 if [ -x "$(command -v peek)" ]; then alias peek='peek --display=$DISPLAY &'; fi
 
-
+# virtualenv
+if [ -x "$(command -v virtualenv)" ]; then alias cvenv='virtualenv venv'; fi
 
 if command -v xclip &> /dev/null
 then
