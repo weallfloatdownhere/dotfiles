@@ -171,7 +171,8 @@ if [ -x "$(command -v virtualenv)" ]; then
 alias cvenv='virtualenv venv';
 alias avenv='test -f ./venv/bin/activate && . ./venv/bin/activate'
 alias dvenv='deactivate'
-alias cai='cvenv && avenv && pip3i'
+alias caivenv='cvenv && avenv && pip3i ./requirements.txt'
+alias caivenvd='cvenv && avenv && pip3i ./requirements_dev.txt'
 fi
 
 if command -v xclip &> /dev/null
