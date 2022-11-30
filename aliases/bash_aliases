@@ -152,7 +152,10 @@ alias icat="kitty +kitten icat"
 if [ -x "$(command -v ranger)" ]; then alias r='ranger .'; fi
 
 #pip
-if [ -x "$(command -v pip3)" ]; then alias pip3up='pip3 install --upgrade pip'; fi
+if [ -x "$(command -v pip3)" ]; then 
+alias pip3i='pip3 install -r'
+alias pip3up='pip3 install --upgrade pip';
+fi
 
 # Minikube
 if [ -x "$(command -v minikube)" ]; then alias minikuberestart="minikube delete && minikube start"; fi
@@ -167,7 +170,8 @@ if [ -x "$(command -v peek)" ]; then alias peek='peek --display=$DISPLAY &'; fi
 if [ -x "$(command -v virtualenv)" ]; then 
 alias cvenv='virtualenv venv';
 alias avenv='test -f ./venv/bin/activate && . ./venv/bin/activate'
-alias denv='deactivate'
+alias dvenv='deactivate'
+alias cai='cvenv && avenv && pip3i'
 fi
 
 if command -v xclip &> /dev/null
